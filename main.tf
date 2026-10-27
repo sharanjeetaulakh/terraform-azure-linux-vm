@@ -1,4 +1,4 @@
-resource "azurerm_linux_virtual_machine" "vm" {
+resource "azurerm_linux_virtual_machine" "linux_vm" {
     for_each=var.vms
   name                = each.value.name
   resource_group_name = each.value.resource_group_name
@@ -9,7 +9,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
   network_interface_ids = [
     data.azurerm_network_interface.nic[each.key].id
   ]
-admin_password                  = var.admin_password
+admin_password                  = each.value.admin_password
 disable_password_authentication = false
 
   os_disk {
