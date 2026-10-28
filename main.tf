@@ -1,16 +1,16 @@
 resource "azurerm_linux_virtual_machine" "linux_vm" {
-    for_each=var.vms
+  for_each            = var.vms
   name                = each.value.name
   resource_group_name = each.value.resource_group_name
   location            = each.value.location
   size                = each.value.size
-  admin_username      =each.value.admin_username
+  admin_username      = each.value.admin_username
 
   network_interface_ids = [
     data.azurerm_network_interface.nic[each.key].id
   ]
-admin_password                  = each.value.admin_password
-disable_password_authentication = false
+  admin_password                  = each.value.admin_password
+  disable_password_authentication = false
 
   os_disk {
     caching              = each.value.caching
@@ -19,12 +19,12 @@ disable_password_authentication = false
 
   source_image_reference {
     publisher = each.value.publisher
-    offer     = each.value.offer 
+    offer     = each.value.offer
     sku       = each.value.sku
-    version   =each.value.version  
+    version   = each.value.version
   }
 
- 
+
 
   tags = {
     Environment = "Preprod"
