@@ -9,7 +9,7 @@ resource "azurerm_linux_virtual_machine" "linux_vm" {
   network_interface_ids = [
     data.azurerm_network_interface.nic[each.key].id
   ]
-  admin_password                  = each.value.admin_password
+admin_password = var.admin_password_linux
   disable_password_authentication = false
 
   os_disk {
